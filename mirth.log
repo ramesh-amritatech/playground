@@ -1,0 +1,47 @@
+ERROR 2022-08-13 01:58:03,705 [Thread-2] com.mirth.connect.server.controllers.DefaultConfigurationController: error loading encryption key
+com.thoughtworks.xstream.converters.ConversionException: Cannot create java.security.KeyRep by JDK serialization : unrecognized type/format combination: null/null : Cannot create java.security.KeyRep by JDK serialization : unrecognized type/format combination: null/null
+---- Debugging information ----
+message             : Cannot create java.security.KeyRep by JDK serialization : unrecognized type/format combination: null/null
+cause-exception     : com.thoughtworks.xstream.converters.reflection.ObjectAccessException
+cause-message       : Cannot create java.security.KeyRep by JDK serialization : unrecognized type/format combination: null/null
+class               : com.sun.crypto.provider.DESedeKey
+required-type       : com.sun.crypto.provider.DESedeKey
+line number         : 1
+-------------------------------
+	at com.thoughtworks.xstream.core.TreeUnmarshaller.convert(TreeUnmarshaller.java:88)
+	at com.thoughtworks.xstream.core.TreeUnmarshaller.convertAnother(TreeUnmarshaller.java:75)
+	at com.thoughtworks.xstream.core.TreeUnmarshaller.convertAnother(TreeUnmarshaller.java:59)
+	at com.thoughtworks.xstream.core.TreeUnmarshaller.start(TreeUnmarshaller.java:142)
+	at com.thoughtworks.xstream.core.AbstractTreeMarshallingStrategy.unmarshal(AbstractTreeMarshallingStrategy.java:33)
+	at com.thoughtworks.xstream.XStream.unmarshal(XStream.java:931)
+	at com.thoughtworks.xstream.XStream.unmarshal(XStream.java:917)
+	at com.thoughtworks.xstream.XStream.fromXML(XStream.java:861)
+	at com.thoughtworks.xstream.XStream.fromXML(XStream.java:853)
+	at com.mirth.connect.model.converters.ObjectXMLSerializer.fromXML(ObjectXMLSerializer.java:123)
+	at com.mirth.connect.server.controllers.DefaultConfigurationController.loadEncryptionKey(DefaultConfigurationController.java:287)
+	at com.mirth.connect.server.Mirth.startup(Mirth.java:206)
+	at com.mirth.connect.server.Mirth.run(Mirth.java:143)
+Caused by: com.thoughtworks.xstream.converters.reflection.ObjectAccessException: Cannot create java.security.KeyRep by JDK serialization : unrecognized type/format combination: null/null
+	at com.thoughtworks.xstream.converters.reflection.PureJavaReflectionProvider.instantiateUsingSerialization(PureJavaReflectionProvider.java:114)
+	at com.thoughtworks.xstream.converters.reflection.PureJavaReflectionProvider.newInstance(PureJavaReflectionProvider.java:69)
+	at com.thoughtworks.xstream.converters.reflection.ReflectionProviderWrapper.newInstance(ReflectionProviderWrapper.java:42)
+	at com.thoughtworks.xstream.converters.reflection.AbstractReflectionConverter.instantiateNewInstance(AbstractReflectionConverter.java:277)
+	at com.thoughtworks.xstream.converters.reflection.AbstractReflectionConverter.unmarshal(AbstractReflectionConverter.java:149)
+	at com.thoughtworks.xstream.core.TreeUnmarshaller.convert(TreeUnmarshaller.java:81)
+	... 12 more
+Caused by: java.io.NotSerializableException: unrecognized type/format combination: null/null
+	at java.security.KeyRep.readResolve(KeyRep.java:180)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at java.io.ObjectStreamClass.invokeReadResolve(ObjectStreamClass.java:1274)
+	at java.io.ObjectInputStream.readOrdinaryObject(ObjectInputStream.java:2221)
+	at java.io.ObjectInputStream.readObject0(ObjectInputStream.java:1668)
+	at java.io.ObjectInputStream.readObject(ObjectInputStream.java:502)
+	at java.io.ObjectInputStream.readObject(ObjectInputStream.java:460)
+	at com.thoughtworks.xstream.converters.reflection.PureJavaReflectionProvider.instantiateUsingSerialization(PureJavaReflectionProvider.java:112)
+	... 17 more
+INFO  2022-08-13 01:58:05,122 [Thread-2] com.mirth.connect.server.Mirth: Mirth Connect 2.1.1.5490 (Built on July 6, 2011) server successfully started.
+INFO  2022-08-13 01:58:05,122 [Thread-2] com.mirth.connect.server.Mirth: This product was developed by Mirth Corporation (http://www.mirthcorp.com) and its contributors (c)2005-2022.
+INFO  2022-08-13 01:58:05,122 [Thread-2] com.mirth.connect.server.Mirth: Running OpenJDK 64-Bit Server VM 1.8.0_322 on Linux (4.18.0-408.el8.x86_64, amd64), derby, with charset UTF-8.
